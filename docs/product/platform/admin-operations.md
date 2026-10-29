@@ -19,12 +19,12 @@ The NextCybr team runs the platform from a separate **admin portal**.
 | **Mentorship activity** | See all sessions and webinar registrations. Cancel a session or registration. | Cancelling refunds the candidate |
 | **Payouts** | View weekly payouts and what's in them, and re-check a stuck payout with Stripe | — |
 | **Payout accounts** | See each mentor's Stripe payout status | — |
-| **Support** | Ticket queue, replies, status changes | — |
-| **Blog** | Write and edit posts with images | Appears on the public blog |
+| **Support** | Ticket queue, replies, status and priority changes, delete tickets | Deleted tickets are hidden from the user too, but kept on record |
+| **Blog** | Write, edit and delete posts with images | Appears on, or is removed from, the public blog |
 | **Waitlist** | View and export pre-launch sign-ups | — |
 
 :::note Not available in the admin portal yet
-Creating, editing or deleting users, deleting blog posts, job/applicant/hire reports, the Reports and Settings screens, and changing ticket priority. See [Known limitations](../known-limitations.md).
+Creating, editing or deleting users, job/applicant/hire reports, and the Reports and Settings screens. See [Known limitations](../known-limitations.md).
 :::
 
 [Engineering detail →](/apps/admin-portal)

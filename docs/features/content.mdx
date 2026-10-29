@@ -16,8 +16,8 @@ description: Admin-authored blog posts, media uploads, and the pre-launch coming
 
 ## Blog
 
-- **Authoring (admin).** Rich-text editor (Tiptap) with cover images. `POST`, `PATCH` and `DELETE /api/v1/admin/blog`. The same router is also mounted at `/client/blog`, and its write routes always require `ADMIN`.
-- **Reading (public).** `GET /client/blog/get-blogs` and `GET /client/blog/get-blog?id=` feed `/blogs` and `/blogs/[id]`. Content is sanitised with DOMPurify before rendering.
+- **Authoring (admin).** Rich-text editor (Tiptap) with cover images. `POST`, `PATCH` and `DELETE /api/v1/admin/blog?id=`, plus `DELETE /api/v1/admin/blogs/:id` used by the admin portal. Deleting is a **soft delete**: the post is set `INACTIVE` and every blog read filters it out. The blog router is also mounted at `/client/blog`, and its write routes always require `ADMIN`.
+- **Reading (public).** `GET /client/blog/get-blogs` and `GET /client/blog/get-blog?id=` (or `GET …/blog/:id`) feed `/blogs` and `/blogs/[id]`. Content is sanitised with DOMPurify before rendering.
 - **Images.** Admins upload directly to S3 with presigned URLs: `POST /admin/uploads/presign`, view with `GET /admin/uploads/view`, delete with `DELETE /admin/uploads`. `POST /admin/uploads/sweep` cleans up orphaned uploads and is protected by `SWEEP_SECRET`. Public media is served through `GET /api/v1/media` (CloudFront / `CDN_URL`).
 
 ## Launch waitlist & coming-soon gate

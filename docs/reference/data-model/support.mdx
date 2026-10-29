@@ -71,6 +71,7 @@ erDiagram
 | `status` | [TicketStatus](./enums#ticketstatus) | @default(OPEN) |  |
 | `priority` | [TicketPriority](./enums#ticketpriority) | @default(MEDIUM) |  |
 | `supportLevel` | `Int` | @default(0) | The submitter's plan support tier when the ticket was opened (SUPPORT_PRIORITY_LEVEL*: 0 = Standard, 1 = Priority, 2 = Highest). Tie-breaker within a priority so paid plans are answered first. |
+| `deletedAt` | `DateTime?` |  | Set when an admin deletes the ticket. Deleted tickets stay in the table but are left out of every user and admin read. |
 | `createdAt` | `DateTime` | @default(now()) |  |
 | `updatedAt` | `DateTime` | @updatedAt |  |
 | `category` | [Category](#category) | relation (FK) |  |

@@ -33,16 +33,16 @@ stateDiagram-v2
 
 - Users and the team reply in a threaded conversation on the ticket.
 - Users can mark their own ticket resolved.
-- The team works the queue in the admin portal (filters, replies, status changes).
+- The team works the queue in the admin portal: filters, replies, status changes and **priority changes** (Low / Medium / High).
+- The team can **delete** a ticket. It disappears from the queue and from the user's ticket list, and nobody can reply to it, but it's kept on record (soft delete).
 
 ## Edge cases worth testing
 
 - Attach 4 screenshots, or one of 3 MB → rejected.
 - Choose "Other" with no description → rejected.
 - A Pro user's new ticket starts at a higher priority than a Free user's.
+- Admin changes priority without changing the value → saves without error.
+- Admin deletes a ticket → it's gone from the user's list, and the user's open ticket page can no longer send replies.
 
-:::warning Known issue
-The admin portal shows a control for changing a ticket's priority, but it doesn't work. Priority is set automatically when the ticket is created. See [Known limitations](../known-limitations.md).
-:::
 
 [Engineering detail →](/features/support)

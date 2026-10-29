@@ -44,11 +44,14 @@ stateDiagram-v2
 | Admin | Queue with filters | `GET /admin/support/tickets` |
 | Admin | Reply (`TicketSenderType.ADMIN`) | `POST /admin/support/tickets/messages` |
 | Admin | Change status | `PATCH /admin/support/tickets/status` |
+| Admin | Change priority (`LOW` / `MEDIUM` / `HIGH`) | `PATCH /admin/support/tickets/priority` |
+| Admin | View one ticket | `GET /admin/support/tickets/:id` (or `GET /admin/support/ticket?id=`) |
+| Admin | Delete (soft) | `DELETE /admin/support/tickets/:id` |
 
 Admin routes are also mounted under `/client/support/admin/*` for backwards compatibility.
 
-:::warning Known gap
-The admin ticket screen has a priority control that calls `PATCH /admin/support/tickets/priority`, which the server doesn't define. Priority is set automatically at creation and can't currently be changed. See [Admin portal → Known gaps](/apps/admin-portal#known-gaps-as-of-this-sync).
-:::
+### Deleting tickets
+
+Admin deletion is a **soft delete**: it sets `Ticket.deletedAt`, and the ticket and its messages stay in the database. A deleted ticket is left out of every read: the user's ticket list and detail, user replies and resolve, the admin queue and detail, admin replies and status/priority changes, and the dashboard ticket stats. Acting on a deleted ticket returns 404.
 
 **API:** [Support (client)](/reference/api/support) · [Support (admin)](/reference/api/support-admin)

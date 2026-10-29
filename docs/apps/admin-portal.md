@@ -28,28 +28,27 @@ src/
 
 | Route | Screen | What admins do | Main endpoints |
 | --- | --- | --- | --- |
-| `/dashboard` | `DashboardStatsScreen` | Platform KPIs and charts: users by role, active users, jobs, revenue | `GET /admin/get-dashboard-stats` |
+| `/dashboard` | `DashboardStatsScreen` | KPIs over a chosen period: users by role, active and closed jobs, free vs paid plan split, support tickets by status | `GET /admin/get-dashboard-stats` |
 | `/approvals` | `ApprovalsListing` | Approve, reject or bulk-approve pending mentors and recruiters | `/admin/approvals/*` |
 | `/waitinglist` | `WaitingListScreen` | Launch waitlist and CSV export | `/client/coming-soon/notify-emails[/export]` |
 | `/students` · `/company` · `/mentors` | `StudentScreen` · `CompanyScreen` · `MentorScreen` | Search, filter and open users | `GET /admin/get-users` |
 | `/:userType/detail` | `UserDetail` | Full profile, subscription invoices and mentorship purchases | `GET /admin/get-user`, `/admin/get-all-invoices?id=`, `/admin/get-user-purchases` |
-| `/blogs` · `/blogs/post-new-blog` | `BlogScreen` · `CreateBlogScreen` | Write, preview and edit posts with images | `/admin/blog`, `/admin/uploads/*` |
+| `/blogs` · `/blogs/post-new-blog` | `BlogScreen` · `CreateBlogScreen` | Write, preview, edit and delete posts with images (delete is soft: the post is set `INACTIVE`) | `/admin/blog`, `DELETE /admin/blogs/:id`, `/admin/uploads/*` |
 | `/entitlements` | `EntitlementsScreen` | **Plans tab**: create/edit plans, per-country prices, the plan × feature matrix, assign a plan to a user. **Feature definitions tab**: the registry. | `/admin/dynamic-plans`, `/admin/plans/:id/features`, `/admin/plans/:id/country-prices`, `/admin/plans/:id/assign`, `/admin/feature-definitions` |
 | `/subscription-discounts` | `SubscriptionDiscountsScreen` | Create and edit platform discount codes | `/admin/subscription-discounts` |
 | `/payments` | `PaymentList` | Subscriptions, invoices and mentor-service purchases | `/admin/get-all-subscriptions`, `/admin/get-all-invoices`, `/admin/get-all-mentor-services` |
 | `/payouts` · `/payouts/:payoutId` | `PayoutList` · `PayoutDetail` | Weekly payouts and their transactions, manual reconcile | `/admin/get-all-payouts`, `/admin/payouts/:id`, `POST …/reconcile` |
 | `/payout-accounts` | `PayoutAccounts` | Mentors' Stripe Connect status | `/admin/payout-accounts` |
 | `/mentorship-activity` | `MentorshipActivityScreen` | All sessions and webinar registrations. Admin cancel (with refund). | `/admin/sessions/:id/cancel`, `/admin/webinar-registrations/:id/cancel` |
-| `/support` · `/support/ticket` | `SupportTicketListing` · `SupportRequestScreen` | Ticket queue, conversation, status changes | `/admin/support/*` |
+| `/support` · `/support/ticket` | `SupportTicketListing` · `SupportRequestScreen` | Ticket queue, conversation, status and priority changes, delete a ticket from the queue or the ticket page (soft delete) | `/admin/support/*` (`PATCH …/tickets/priority`, `DELETE …/tickets/:id`) |
 | `/reports` · `/settings` | `InDev` | Placeholder, not built yet | — |
 | `/subscriptions` | — | Redirects to `/entitlements` | — |
 
 ## Known gaps (as of this sync)
 
 :::warning Frontend ↔ API mismatches
-- **Ticket priority.** `SupportDetailScreen` calls `PATCH /admin/support/tickets/priority`, which the server doesn't define (it returns 404). Only status changes are supported (`PATCH /admin/support/tickets/status`).
-- **Unused wrappers that point at missing routes.** `deleteSupportTicketApi`, `createSupportTicketApi`, `getSupportTicketDetailsApi` (`/support/tickets/:id`), `getBlogByIdApi` (`/blog/:id`) and `deleteBlogApi` (`/blogs/:id`) aren't called anywhere and don't match server routes.
-- **Server features with no admin UI yet.** Create users (`POST /admin/create-user[-with-profile]`), edit or soft-delete users (`PATCH /admin/update-user`, `/admin/delete-user`), delete blog posts (`DELETE /admin/blog?id=`), and the job, applicant and hired-candidate reports (`/admin/get-all-jobs`, `/admin/job-details`, `/admin/get-company-jobs`, `/admin/get-student-job-applications`, `/admin/job-applications`, `/admin/hired-candidates`).
+- **Unused wrapper that points at a missing route.** `createSupportTicketApi` (`POST /admin/support/tickets`) isn't called anywhere and the server has no such route. Admin-created tickets were descoped.
+- **Server features with no admin UI yet.** Create users (`POST /admin/create-user[-with-profile]`), edit or soft-delete users (`PATCH /admin/update-user`, `/admin/delete-user`), and the job, applicant and hired-candidate reports (`/admin/get-all-jobs`, `/admin/job-details`, `/admin/get-company-jobs`, `/admin/get-student-job-applications`, `/admin/job-applications`, `/admin/hired-candidates`).
 :::
 
 ## Plan changes take effect immediately
