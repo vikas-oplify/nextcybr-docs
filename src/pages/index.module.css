@@ -1,0 +1,207 @@
+.hero {
+  background: var(--nc-surface);
+  border-bottom: 1px solid var(--nc-line);
+}
+.heroInner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  align-items: center;
+  padding-top: 72px;
+  padding-bottom: 64px;
+}
+.heroCopy {
+  flex: 1 1 520px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.eyebrow {
+  align-self: flex-start;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--nc-accent);
+  background: var(--ifm-background-color);
+  border: 1px solid var(--nc-line);
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+html[data-theme="dark"] .eyebrow {
+  color: #8fc9ee;
+}
+.title {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.lead {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--nc-ink-2);
+  max-width: 600px;
+}
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 8px;
+}
+.terminal {
+  flex: 1 1 420px;
+  min-width: 0;
+  background: #0b1b33;
+  border-radius: 16px;
+  padding: 24px;
+  color: #cfdcef;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 13px;
+  line-height: 1.9;
+  overflow-x: auto;
+}
+html[data-theme="dark"] .terminal {
+  border: 1px solid var(--nc-line);
+}
+.comment {
+  color: #8da0bf;
+}
+.k1 {
+  color: #7cc4ff;
+}
+.k2 {
+  color: #ffc27a;
+}
+
+.section {
+  padding-top: 64px;
+}
+.lastSection {
+  padding-bottom: 72px;
+}
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.sectionHead .h2 {
+  margin: 0;
+}
+.h2 {
+  font-size: 1.75rem;
+  margin: 0 0 8px;
+}
+.sub {
+  margin: 0 0 28px;
+  color: var(--nc-muted);
+}
+
+.personaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.personaCard {
+  border: 1px solid var(--nc-line);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--nc-ink);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.personaCard:hover {
+  text-decoration: none;
+  color: var(--nc-ink);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 4px 16px rgba(2, 91, 207, 0.08);
+}
+.personaRole {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--ifm-color-primary);
+}
+.personaTitle {
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.personaText {
+  color: var(--nc-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--nc-line);
+  border: 1px solid var(--nc-line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.featureCell {
+  background: var(--ifm-background-color);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--nc-ink);
+}
+.featureCell:hover {
+  text-decoration: none;
+  color: var(--nc-ink);
+  background: var(--nc-surface);
+}
+.featureName {
+  font-weight: 600;
+}
+.featureDesc {
+  color: var(--nc-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.engGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+.engCard {
+  background: var(--nc-surface);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--nc-ink);
+}
+.engCard:hover {
+  text-decoration: none;
+  color: var(--nc-ink);
+  box-shadow: inset 0 0 0 1px var(--ifm-color-primary);
+}
+
+.syncBar {
+  border-top: 1px solid var(--nc-line);
+  background: var(--nc-surface-2);
+}
+.syncInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  font-size: 0.875rem;
+  color: var(--nc-muted);
+}

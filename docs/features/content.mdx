@@ -1,0 +1,33 @@
+---
+title: Blog & launch waitlist
+sidebar_position: 16
+description: Admin-authored blog posts, media uploads, and the pre-launch coming-soon gate with its email waitlist.
+---
+
+# Blog & launch waitlist
+
+<FeatureMeta
+  roles={["ADMIN", "PUBLIC"]}
+  portal={<><code>/blogs</code> · <code>/blogs/[id]</code> · coming-soon page (<code>components/comming-soon</code>)</>}
+  admin={<>Blogs (<code>/blogs</code>, <code>/blogs/post-new-blog</code>) · Waiting list (<code>/waitinglist</code>)</>}
+  server={<><code>modules/blog</code> · <code>modules/uploads</code> · <code>modules/media</code> · <code>modules/comingSoon</code></>}
+  models={<><code>Blog</code> · <code>NotifyEmail</code></>}
+/>
+
+## Blog
+
+- **Authoring (admin).** Rich-text editor (Tiptap) with cover images. `POST`, `PATCH` and `DELETE /api/v1/admin/blog`. The same router is also mounted at `/client/blog`, and its write routes always require `ADMIN`.
+- **Reading (public).** `GET /client/blog/get-blogs` and `GET /client/blog/get-blog?id=` feed `/blogs` and `/blogs/[id]`. Content is sanitised with DOMPurify before rendering.
+- **Images.** Admins upload directly to S3 with presigned URLs: `POST /admin/uploads/presign`, view with `GET /admin/uploads/view`, delete with `DELETE /admin/uploads`. `POST /admin/uploads/sweep` cleans up orphaned uploads and is protected by `SWEEP_SECRET`. Public media is served through `GET /api/v1/media` (CloudFront / `CDN_URL`).
+
+## Launch waitlist & coming-soon gate
+
+When `NEXT_PUBLIC_SHOW_COMING_SOON_PAGE` is on (optionally only for `NEXT_PUBLIC_COMING_SOON_HOSTS`), the portal shows a coming-soon page instead of the app.
+
+| Action | Endpoint |
+| --- | --- |
+| Join waitlist (email, de-duplicated) | `POST /client/coming-soon/notify-launch` → `WAITLIST_WELCOME` email |
+| Enter the portal with the access password | `POST /client/coming-soon/access-main-portal` (checks `PORTAL_ACCESS_PASSWORD`) |
+| Admin: list / export waitlist CSV | `GET /client/coming-soon/notify-emails`, `…/export` |
+
+**API:** [Blog](/reference/api/blog) · [Coming soon](/reference/api/coming-soon) · [Media & uploads](/reference/api/media)

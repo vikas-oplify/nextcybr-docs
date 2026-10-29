@@ -1,0 +1,37 @@
+---
+title: Account settings
+sidebar_position: 17
+description: Contact details, profile visibility, notification preferences, security (password and sessions) and account deactivation.
+---
+
+# Account settings
+
+<FeatureMeta
+  roles={["STUDENT", "COMPANY", "MENTOR"]}
+  portal={<><code>/settings</code> (<code>components/settings</code>)</>}
+  server={<><code>modules/settings</code> · <code>modules/auth</code> (password, sessions)</>}
+  models={<><code>NotificationPreference</code> · role profile (contact, visibility) · <code>LoginSession</code></>}
+/>
+
+| Tab | Endpoints | Rules |
+| --- | --- | --- |
+| Contact details | `GET/PUT /settings/account/contact-details` | Phone needs a country code. Alternate phone and email are validated, and the alternate email can't be the primary one. Only the fields sent are updated. |
+| Profile visibility | `GET/PUT /settings/account/profile-visibility` | `PUBLIC` / `PRIVATE`. Controls the [public profile](./profiles#who-sees-what). |
+| Notification preferences | `GET/PUT /settings/notification/preferences` | See below |
+| Security | `POST /auth/change-password`, `GET /auth/sessions`, `DELETE /auth/sessions/logout`, `POST /auth/sessions/logout-all` | See [Authentication](./authentication#device-sessions) |
+| Deactivate | `POST /settings/account/deactivate` | Sets the user `INACTIVE`, revokes **all** sessions in one transaction, clears cookies and queues `ACCOUNT_DEACTIVATED`. Sign-in is refused afterwards, and support can reactivate. |
+
+## Notification preferences
+
+`NotificationPreference` is created on first read for users who signed up before the feature existed. Every flag defaults to `true`.
+
+| Flag | Controls |
+| --- | --- |
+| `productUpdates` | Application status emails ("Application updates") |
+| `jobAlerts` | The job alert digest |
+| `activity` | Activity notifications |
+| `promotions` | Promotional email |
+| `newsletter` | Newsletter |
+| `security` | Security email. **Always forced on by the server.** |
+
+**API:** [Settings](/reference/api/settings)

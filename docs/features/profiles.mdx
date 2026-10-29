@@ -1,0 +1,46 @@
+---
+title: Profiles & public profile
+sidebar_position: 3
+description: Candidate, company and mentor profiles, how others see them, visibility and anonymity.
+---
+
+# Profiles & public profile
+
+Each role has one profile row hanging off `User`. Profiles drive search, AI matching and the public profile page.
+
+<FeatureMeta
+  roles={["STUDENT", "COMPANY", "MENTOR"]}
+  portal={<><code>/profile</code> · <code>/update-profile</code> · <code>/public-profile/[id]</code> · <code>/companies/[id]</code></>}
+  server={<><code>services/studentProfileService.js</code> · <code>services/companyProfileService.js</code> · <code>modules/public</code> · <code>utils/studentPrivacy.js</code></>}
+  models={<><code>StudentProfile</code> · <code>Education</code> · <code>WorkExperience</code> · <code>SocialLink</code> · <code>CompanyProfile</code> · <code>MentorProfile</code> · <code>CompanyName</code></>}
+/>
+
+## What each profile holds
+
+| Profile | Highlights |
+| --- | --- |
+| **Candidate** (`StudentProfile`) | Headline, location, skills and certifications, education (`EducationLevel` enum: high school through doctorate, bootcamp, micro-credential), work experience with computed years, contract preferences (`ContractType[]`), languages, social links, resume, `profileVisibility`, `anonymous` |
+| **Company** (`CompanyProfile`) | Company details, size, industry, headquarters, locations, logo, the recruiter's role within the company |
+| **Mentor** (`MentorProfile`) | Expertise, experience, bio, timezone (used for slot maths), ratings aggregated from reviews, badges (`VERIFIED_MENTOR` on approval, `PRO_MENTOR` while on Mentor Pro) |
+
+All three profiles carry `profileVisibility` (default `PUBLIC`).
+
+**Company name picker.** Work-experience entries pick employers from `CompanyName`, seeded from open data (Wikidata, CC0) plus a curated list. Users can add missing names. Those are sanitised and stored as `USER` rows, and a normalised `nameKey` collapses variants like "AT&T" and "at & t".
+
+## Who sees what
+
+| Viewer | Endpoint | Rules |
+| --- | --- | --- |
+| Anyone | `GET /client/public/profile?id=` | Returns 404 unless the profile is `PUBLIC`. Anonymous candidates are anonymised. Mentors include reviews and ratings from completed sessions. |
+| Recruiter | `GET /company/student-profile` | Full candidate profile for sourcing |
+| Mentor | `GET /mentor/student-profile` | Counts against `MENTOR_CANDIDATE_PROFILE_VIEWS_MONTHLY` |
+| Candidate | `GET /student/company-profile`, `GET /student/mentor-profile` | Company page with open jobs, and mentor page with services |
+
+**Visibility** (`PUBLIC` / `PRIVATE`) is set in [Settings](./settings). The **anonymous** flag hides a candidate's identity in places where they appear to others.
+
+## Directories
+
+- Candidates browse companies (`/companies`, `GET /student/find-companies`) and mentors (`GET /student/find-mentors`).
+- Recruiters and mentors browse candidates (`GET /company/find-students`) with location, contract type, experience, skills and free-text filters.
+
+**API:** [Public](/reference/api/public) · [Student](/reference/api/student) · [Company](/reference/api/company)

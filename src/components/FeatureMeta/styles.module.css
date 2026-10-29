@@ -1,0 +1,86 @@
+.wrap {
+  margin: 0 0 2rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  color: var(--nc-ink-2);
+  background: var(--nc-surface-2);
+  border: 1px solid var(--nc-line);
+}
+.roleSTUDENT,
+.roleADMIN {
+  color: var(--nc-pill-role-fg);
+  background: var(--nc-pill-role-bg);
+  border-color: transparent;
+}
+.roleCOMPANY,
+.roleMENTOR {
+  color: var(--nc-accent);
+  background: rgba(27, 99, 146, 0.1);
+  border-color: transparent;
+}
+html[data-theme="dark"] .roleCOMPANY,
+html[data-theme="dark"] .roleMENTOR {
+  color: #8fc9ee;
+  background: rgba(27, 99, 146, 0.3);
+}
+.tag {
+  color: var(--nc-patch);
+  background: var(--nc-patch-bg);
+  border-color: transparent;
+}
+
+.card {
+  border: 1px solid var(--nc-line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.cardHead {
+  background: var(--nc-surface-2);
+  padding: 0.7rem 1.1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--nc-line);
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(130px, 180px) 1fr;
+  margin: 0;
+  font-size: 0.9rem;
+}
+.grid dt,
+.grid dd {
+  margin: 0;
+  padding: 0.65rem 1.1rem;
+  border-bottom: 1px solid var(--nc-line);
+}
+.grid dt {
+  color: var(--nc-muted);
+  font-weight: 500;
+}
+.grid dt:last-of-type,
+.grid dd:last-of-type {
+  border-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .grid dt {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}

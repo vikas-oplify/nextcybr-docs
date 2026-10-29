@@ -1,0 +1,251 @@
+/*
+ * NextCybr Docs theme — brand tokens from nextcybr-portal (app/globals.css):
+ * primary #025bcf, accent #1b6392, Poppins headings over Inter body.
+ */
+
+:root {
+  --nc-ink: #0b1b33;
+  --nc-ink-2: #3b4a63;
+  --nc-muted: #5a6b85;
+  --nc-line: #e3e9f2;
+  --nc-surface: #f4f8fe;
+  --nc-surface-2: #f7f9fc;
+  --nc-accent: #1b6392;
+  --nc-code-bg: #f1f4f9;
+
+  --ifm-color-primary: #025bcf;
+  --ifm-color-primary-dark: #0252ba;
+  --ifm-color-primary-darker: #024eb0;
+  --ifm-color-primary-darkest: #014091;
+  --ifm-color-primary-light: #0264e4;
+  --ifm-color-primary-lighter: #0268ee;
+  --ifm-color-primary-lightest: #1b7bfd;
+
+  --ifm-font-family-base: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ifm-heading-font-family: "Poppins", "Inter", system-ui, sans-serif;
+  --ifm-font-family-monospace: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ifm-font-color-base: var(--nc-ink);
+  --ifm-heading-color: var(--nc-ink);
+  --ifm-heading-font-weight: 600;
+  --ifm-line-height-base: 1.65;
+  --ifm-global-radius: 10px;
+  --ifm-code-font-size: 88%;
+  --ifm-code-background: var(--nc-code-bg);
+  --ifm-code-border-radius: 6px;
+  --ifm-background-color: #ffffff;
+  --ifm-navbar-shadow: none;
+  --ifm-toc-border-color: var(--nc-line);
+  --ifm-table-border-color: var(--nc-line);
+  --ifm-table-stripe-background: transparent;
+  --ifm-table-head-background: var(--nc-surface-2);
+  --ifm-menu-color: var(--nc-ink-2);
+  --ifm-menu-color-background-active: #eaf2fd;
+  --ifm-menu-color-background-hover: #f1f5fb;
+  --docusaurus-highlighted-code-line-bg: rgba(2, 91, 207, 0.08);
+
+  --nc-pill-role-bg: #eaf2fd;
+  --nc-pill-role-fg: #014aa8;
+  --nc-get: #0a6b3d;
+  --nc-get-bg: #e3f5ea;
+  --nc-post: #014aa8;
+  --nc-post-bg: #e4eefc;
+  --nc-put: #6b3fa0;
+  --nc-put-bg: #f0e9fa;
+  --nc-patch: #8a4b00;
+  --nc-patch-bg: #fff1dc;
+  --nc-delete: #a01c1c;
+  --nc-delete-bg: #fde8e8;
+}
+
+html[data-theme="dark"] {
+  --nc-ink: #e6edf7;
+  --nc-ink-2: #c3cfe0;
+  --nc-muted: #93a3bb;
+  --nc-line: #23324a;
+  --nc-surface: #0f1d33;
+  --nc-surface-2: #121f35;
+  --nc-code-bg: #16253d;
+
+  --ifm-color-primary: #5aa2ff;
+  --ifm-color-primary-dark: #3a8fff;
+  --ifm-color-primary-darker: #2a86ff;
+  --ifm-color-primary-darkest: #006ef9;
+  --ifm-color-primary-light: #7ab5ff;
+  --ifm-color-primary-lighter: #8abeff;
+  --ifm-color-primary-lightest: #b9d8ff;
+  --ifm-background-color: #0a1526;
+  --ifm-background-surface-color: #0d1a2e;
+  --ifm-navbar-background-color: #0a1526;
+  --ifm-menu-color-background-active: rgba(90, 162, 255, 0.14);
+  --ifm-menu-color-background-hover: rgba(90, 162, 255, 0.08);
+  --docusaurus-highlighted-code-line-bg: rgba(90, 162, 255, 0.12);
+
+  --nc-pill-role-bg: rgba(90, 162, 255, 0.16);
+  --nc-pill-role-fg: #a9cbff;
+  --nc-get: #7fe0aa;
+  --nc-get-bg: rgba(46, 160, 98, 0.18);
+  --nc-post: #a9cbff;
+  --nc-post-bg: rgba(90, 162, 255, 0.18);
+  --nc-put: #d4b8f5;
+  --nc-put-bg: rgba(150, 100, 220, 0.2);
+  --nc-patch: #ffc98a;
+  --nc-patch-bg: rgba(220, 140, 40, 0.2);
+  --nc-delete: #ffadad;
+  --nc-delete-bg: rgba(220, 70, 70, 0.2);
+}
+
+/* ─── Chrome ──────────────────────────────────────────────────────────── */
+
+.navbar {
+  border-bottom: 1px solid var(--nc-line);
+}
+.navbar__title {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 600;
+}
+.navbar__title::after {
+  content: " Docs";
+  color: var(--nc-muted);
+  font-weight: 500;
+}
+.navbar__link--active {
+  font-weight: 600;
+}
+.footer--dark {
+  --ifm-footer-background-color: #0b1b33;
+}
+
+.theme-doc-sidebar-menu .menu__link {
+  font-size: 0.92rem;
+}
+.theme-doc-sidebar-menu .menu__list-item-collapsible > .menu__link,
+.theme-doc-sidebar-menu > .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link {
+  font-weight: 600;
+}
+
+/* ─── Content ─────────────────────────────────────────────────────────── */
+
+.markdown h1:first-child {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.markdown h2 {
+  margin-top: 2.6rem;
+  letter-spacing: -0.01em;
+}
+.markdown > p:first-of-type {
+  font-size: 1.08rem;
+  color: var(--nc-ink-2);
+}
+.markdown table {
+  display: table;
+  width: 100%;
+  font-size: 0.9rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--nc-line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.markdown table thead tr {
+  border-bottom: 0;
+}
+.markdown table th {
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.markdown table th,
+.markdown table td {
+  border: 0;
+  border-bottom: 1px solid var(--nc-line);
+  padding: 0.6rem 0.85rem;
+  vertical-align: top;
+}
+.markdown table tr:last-child td {
+  border-bottom: 0;
+}
+/* Wide tables scroll inside their own box instead of the page. */
+.markdown .table-wrap,
+.markdown table {
+  max-width: 100%;
+}
+@media (max-width: 996px) {
+  .markdown table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+.markdown code {
+  border: 0;
+  padding: 0.1rem 0.35rem;
+  word-break: break-word;
+}
+
+details.alert,
+.markdown details {
+  border-radius: 10px;
+}
+
+.docusaurus-mermaid-container {
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem 1rem;
+  margin-bottom: var(--ifm-leading);
+  border: 1px solid var(--nc-line);
+  border-radius: 12px;
+  background: var(--nc-surface-2);
+  overflow-x: auto;
+}
+
+/* ─── API & plan tokens (used by generated reference pages) ───────────── */
+
+.method {
+  display: inline-block;
+  min-width: 3.9rem;
+  text-align: center;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+}
+.method--get { color: var(--nc-get); background: var(--nc-get-bg); }
+.method--post { color: var(--nc-post); background: var(--nc-post-bg); }
+.method--put { color: var(--nc-put); background: var(--nc-put-bg); }
+.method--patch { color: var(--nc-patch); background: var(--nc-patch-bg); }
+.method--delete { color: var(--nc-delete); background: var(--nc-delete-bg); }
+
+.markdown code.api-path {
+  display: inline-block;
+  margin-top: 0.35rem;
+  word-break: normal;
+  overflow-wrap: normal;
+  min-width: 14rem;
+}
+
+.role-pill,
+.gate {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.5;
+  padding: 0.05rem 0.5rem;
+  margin: 0.1rem 0;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.role-pill { color: var(--nc-pill-role-fg); background: var(--nc-pill-role-bg); }
+.gate { font-family: var(--ifm-font-family-monospace); font-weight: 500; }
+.gate--quota { color: var(--nc-patch); background: var(--nc-patch-bg); }
+.gate--feature { color: var(--nc-put); background: var(--nc-put-bg); }
+.gate--ai { color: var(--nc-post); background: var(--nc-post-bg); }
+.gate--approved { color: var(--nc-get); background: var(--nc-get-bg); }
+.gate--ratelimit { color: var(--nc-delete); background: var(--nc-delete-bg); }
+
+.cell-yes { color: var(--nc-get); font-weight: 600; }
+.cell-no { color: var(--nc-muted); }
+.cell-unset { color: var(--nc-muted); font-style: italic; font-size: 0.85em; }

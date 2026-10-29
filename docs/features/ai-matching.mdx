@@ -1,0 +1,29 @@
+---
+title: AI matching
+sidebar_position: 10
+description: AI job search, AI mentor match and AI candidate/mentee search, plus the rule-based suggestion feeds.
+---
+
+# AI matching
+
+Several features rank one side of the marketplace for the other. AI versions use OpenAI and are quota-gated. Rule-based suggestion feeds are free.
+
+<FeatureMeta
+  roles={["STUDENT", "COMPANY", "MENTOR"]}
+  tags={["AI"]}
+  portal={<><code>/jobs/ai-suggested-jobs</code> · <code>/mentorship/ai-suggested-mentors</code> · <code>/candidates</code> · <code>/myjobs/get-suggested-candidates/[id]</code></>}
+  server={<><code>services/aiJobMatchingService.js</code> · <code>services/aiMentorMatchingService.js</code> · <code>services/aiCandidateSuggestionsService.js</code></>}
+/>
+
+| Who | Feature | Endpoint | Gates | Plan differences |
+| --- | --- | --- | --- | --- |
+| Candidate | AI job search | `GET /student/find-jobs-by-ai` | `AI_JOB_SEARCH_MONTHLY` + tokens `JOB_MATCHING` | Free sees 5 results per search (`AI_JOB_SEARCH_RESULTS_PER_SEARCH`). Pro Plus gets the **advanced job-fit breakdown** (per-criterion scores, career-goal alignment, what to do before applying, `AI_JOB_FIT_ADVANCED`). Others get overall match, top strengths and top gaps. |
+| Candidate | AI mentor match | `GET /student/ai-suggested-mentors` | `AI_MENTOR_MATCH_MONTHLY` + tokens `MENTOR_MATCHING` | Free sees 1 result per search. Match reasoning (`AI_MENTOR_MATCH_REASONING`) on paid plans. |
+| Recruiter | AI Match Run (per job) | `GET /company/suggested-students-for-job` | `COMPANY_AI_MATCH_RUNS_DAILY` + tokens | Saved runs reopen for free. See [Recruiter tools](./recruiter-tools). |
+| Recruiter | AI candidate search | `GET /company/candidates/search` | `COMPANY_AI_CANDIDATE_SEARCH_MONTHLY` + tokens | |
+| Mentor | AI mentee search | `GET /mentor/candidates/search` | `MENTOR_AI_CANDIDATE_SEARCH_MONTHLY` + tokens | |
+| Candidate | Suggested mentors | `GET /student/suggested-mentors` | — | Rule-based |
+| Recruiter | Suggested students | `GET /company/suggested-students` | — | Rule-based |
+| Mentor | Suggested mentees | `GET /mentor/suggested-mentee` | — | Rule-based |
+
+Every AI route follows the same reserve → call → settle (or refund) pattern described in [AI services & usage](/backend/ai-services). A request that fails gives back both its quota unit and its reserved tokens.
