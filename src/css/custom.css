@@ -181,7 +181,9 @@ html[data-theme="dark"] {
 .markdown code {
   border: 0;
   padding: 0.1rem 0.35rem;
-  word-break: break-word;
+  /* Wraps long tokens in prose without letting table columns shrink below
+     a word's width (legacy word-break: break-word split FREE into FR/EE). */
+  overflow-wrap: break-word;
 }
 
 details.alert,
@@ -225,6 +227,60 @@ details.alert,
   word-break: normal;
   overflow-wrap: normal;
   min-width: 14rem;
+}
+
+/* Phones: API endpoint tables (Endpoint | Purpose | Access | Gates) become
+   one card per endpoint instead of a sideways-scrolling table. */
+@media (max-width: 700px) {
+  .markdown table:has(code.api-path) {
+    display: block;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+  }
+  .markdown table:has(code.api-path) thead {
+    display: none;
+  }
+  .markdown table:has(code.api-path) tbody,
+  .markdown table:has(code.api-path) tr,
+  .markdown table:has(code.api-path) td {
+    display: block;
+    width: 100%;
+  }
+  .markdown table:has(code.api-path) tr {
+    border: 1px solid var(--nc-line);
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+  .markdown table:has(code.api-path) td {
+    border-bottom: 1px solid var(--nc-line);
+  }
+  .markdown table:has(code.api-path) tr td:last-child {
+    border-bottom: 0;
+  }
+  .markdown table:has(code.api-path) td:first-child {
+    background: var(--nc-surface-2);
+  }
+  .markdown table:has(code.api-path) td:not(:first-child)::before {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--nc-muted);
+    margin-bottom: 0.2rem;
+  }
+  .markdown table:has(code.api-path) td:nth-child(2)::before { content: "Purpose"; }
+  .markdown table:has(code.api-path) td:nth-child(3)::before { content: "Access"; }
+  .markdown table:has(code.api-path) td:nth-child(4)::before { content: "Gates"; }
+  .markdown code.api-path {
+    min-width: 0;
+  }
+  .markdown .gate {
+    white-space: normal;
+    word-break: break-all;
+  }
 }
 
 .role-pill,
