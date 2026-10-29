@@ -46,6 +46,13 @@ const FEATURES = [
   ["Messaging & notifications", "/features/messaging", "Real-time chat rules, presence, notifications and preferences."],
 ];
 
+const PRODUCT = [
+  ["How NextCybr works", "/product", "The marketplace, how it makes money, and the rules that apply everywhere."],
+  ["Plans & pricing", "/product/plans-and-pricing", "What every plan includes and how upgrades, downgrades and cancellations behave."],
+  ["Business rules by feature", "/product/candidates/jobs-and-applications", "Limits, lifecycles, refunds and edge cases worth testing, in plain language."],
+  ["Known limitations", "/product/known-limitations", "What's not built yet, known issues, and behaviour that's intended."],
+];
+
 const ENGINEERING = [
   ["API reference", "/reference/api", `${sync.counts.endpoints} endpoints with roles, plan gates and AI quotas.`],
   ["Data model", "/reference/data-model", `${sync.counts.models} Prisma models in ten domains, with ER diagrams.`],
@@ -75,11 +82,11 @@ export default function Home() {
               ships.
             </p>
             <div className={styles.ctas}>
-              <Link className="button button--primary button--lg" to="/overview">
-                Start with the overview
+              <Link className="button button--primary button--lg" to="/product">
+                Product guide
               </Link>
-              <Link className="button button--secondary button--lg" to="/reference/api">
-                Browse the API
+              <Link className="button button--secondary button--lg" to="/overview">
+                Engineering docs
               </Link>
             </div>
           </div>
@@ -121,7 +128,22 @@ export default function Home() {
 
         <section className={`container ${styles.section}`}>
           <div className={styles.sectionHead}>
-            <h2 className={styles.h2}>Feature guides</h2>
+            <h2 className={styles.h2}>For product & QA</h2>
+            <Link to="/product">Product guide →</Link>
+          </div>
+          <div className={styles.engGrid}>
+            {PRODUCT.map(([name, to, desc]) => (
+              <Link key={to} to={to} className={styles.engCard}>
+                <span className={styles.featureName}>{name}</span>
+                <span className={styles.featureDesc}>{desc}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className={`container ${styles.section}`}>
+          <div className={styles.sectionHead}>
+            <h2 className={styles.h2}>Feature guides (engineering)</h2>
             <Link to="/features">All features →</Link>
           </div>
           <div className={styles.featureGrid}>

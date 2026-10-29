@@ -86,7 +86,8 @@ const config = {
         title: "NextCybr",
         logo: { alt: "NextCybr", src: "img/logo.svg" },
         items: [
-          { type: "docSidebar", sidebarId: "guide", position: "left", label: "Guide" },
+          { type: "docSidebar", sidebarId: "product", position: "left", label: "Product guide" },
+          { type: "docSidebar", sidebarId: "guide", position: "left", label: "Engineering" },
           { to: "/features", label: "Features", position: "left", activeBaseRegex: "^/features" },
           {
             to: "/reference/api",
@@ -100,7 +101,6 @@ const config = {
             position: "left",
             activeBaseRegex: "^/reference/data-model",
           },
-          { to: "/reference/plans", label: "Plans", position: "left" },
           { type: "search", position: "right" },
           {
             type: "dropdown",
@@ -121,7 +121,16 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "Guide",
+            title: "Product guide",
+            items: [
+              { label: "Overview", to: "/product" },
+              { label: "Plans & pricing", to: "/product/plans-and-pricing" },
+              { label: "Roles & approval", to: "/product/accounts/roles-and-access" },
+              { label: "Known limitations", to: "/product/known-limitations" },
+            ],
+          },
+          {
+            title: "Engineering",
             items: [
               { label: "Platform overview", to: "/overview" },
               { label: "Personas & roles", to: "/getting-started/personas" },
