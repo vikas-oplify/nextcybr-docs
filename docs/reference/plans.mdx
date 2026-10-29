@@ -15,6 +15,7 @@ These are the **seeded defaults** from `prisma/seedEntitlementSystem.js`. Admins
 
 - **8 plans** across three audiences · **56 feature definitions**
 - <strong>Number</strong> = limit per period · <span class="cell-yes">Unlimited</span> · <span class="cell-yes">✓</span> enabled · <span class="cell-no">✕</span> disabled · <span class="cell-unset">unset</span> = no seeded value (the engine treats a missing row as disabled)
+- <span class="gate gate--quota">Not built</span> = seeded but no product behind it yet (`src/constants/unbuiltFeatures.js`). The admin matrix locks these; don't sell them.
 - **Type** — `Capacity` limits count live records (e.g. active services); the others are counters that reset on the given schedule.
 
 How these resolve at request time is covered in [Plans & entitlements engine](/backend/entitlements).
@@ -149,7 +150,7 @@ How these resolve at request time is covered in [Plans & entitlements engine](/b
 
 | Feature | Type | Free | Pro | Custom |
 | --- | --- | --- | --- | --- |
-| <span title="Gate only — actual multi-seat workspace model is a separate, not-yet-built capability.">Shared company workspace (multi-seat)</span><br/><code>COMPANY_SHARED_WORKSPACE</code> | On/off | <span class="cell-no">✕</span> | <span class="cell-yes">✓</span> | <span class="cell-yes">✓</span> |
+| <span title="Gate only — actual multi-seat workspace model is a separate, not-yet-built capability.">Shared company workspace (multi-seat)</span> <span class="gate gate--quota" title="No product behind it yet. Don't sell it.">Not built</span><br/><code>COMPANY_SHARED_WORKSPACE</code> | On/off | <span class="cell-no">✕</span> | <span class="cell-yes">✓</span> | <span class="cell-yes">✓</span> |
 | <span title="">Job templates & duplicate-job</span><br/><code>COMPANY_JOB_TEMPLATES</code> | On/off | <span class="cell-no">✕</span> | <span class="cell-yes">✓</span> | <span class="cell-yes">✓</span> |
 | <span title="">Candidate & shortlist export</span><br/><code>COMPANY_CANDIDATE_EXPORT</code> | On/off | <span class="cell-no">✕</span> | <span class="cell-yes">✓</span> | <span class="cell-yes">✓</span> |
 
@@ -157,7 +158,7 @@ How these resolve at request time is covered in [Plans & entitlements engine](/b
 
 | Feature | Type | Free | Pro | Custom |
 | --- | --- | --- | --- | --- |
-| <span title="Seat count. Free: 30-day expiry per seat (enforced separately, not by this counter). Pro: ongoing while subscribed.">Employee Development Seats</span><br/><code>COMPANY_DEV_SEATS</code> | Capacity | <strong>1</strong> | <strong>2</strong> | <span class="cell-yes">Unlimited</span> |
+| <span title="Seat count. Free: 30-day expiry per seat (enforced separately, not by this counter). Pro: ongoing while subscribed.">Employee Development Seats</span> <span class="gate gate--quota" title="No product behind it yet. Don't sell it.">Not built</span><br/><code>COMPANY_DEV_SEATS</code> | Capacity | <strong>1</strong> | <strong>2</strong> | <span class="cell-yes">Unlimited</span> |
 
 ## Mentor (MENTOR)
 

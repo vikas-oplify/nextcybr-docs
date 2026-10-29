@@ -21,11 +21,13 @@ erDiagram
   MentorProfile ||--o{ MentorAvailability : "mentorProfile"
   OneToOneMentorService |o--o{ MentorAvailability : "oneToOneService"
   MentorProfile ||--o{ MentorAvailabilityException : "mentorProfile"
+  DiscountCode |o--o{ Session : "discountCode"
   OneToOneMentorService ||--o{ Session : "oneToOneService"
   StudentProfile ||--o{ Session : "student"
   Session ||--o| SessionReview : "session"
   OneToOneMentorService ||--o{ SessionWaitlist : "oneToOneService"
   StudentProfile ||--o{ SessionWaitlist : "student"
+  DiscountCode |o--o{ WebinarRegistration : "discountCode"
   StudentProfile ||--o{ WebinarRegistration : "student"
   WebinarMentorService ||--o{ WebinarRegistration : "webinarService"
   User ||--o{ DiscountCode : "mentor"
@@ -156,6 +158,9 @@ Backed by partial unique index Session_active_slot_unique on (oneToOneServiceId,
 | `scheduledAt` | `DateTime` |  |  |
 | `duration` | `Int` |  |  |
 | `price` | `Float` |  |  |
+| `discountCodeId` | `String?` |  | Mentor discount code applied at checkout, and how much it took off the service's list price (discountedPrice ?? price). `price` above is already net of it, so Stripe, payouts and refunds need nothing else. |
+| `discountCode` | [DiscountCode?](#discountcode) | relation (FK) |  |
+| `discountAmount` | `Float?` |  |  |
 | `currency` | `String` | @default("USD") |  |
 | `status` | [SessionStatus](./enums#sessionstatus) | @default(PENDING) |  |
 | `roomId` | `String?` |  |  |
@@ -211,6 +216,9 @@ A student asking to be notified when a slot frees up on a date that's currently 
 | `studentId` | `String` |  |  |
 | `status` | [RegistrationStatus](./enums#registrationstatus) | @default(PENDING) |  |
 | `price` | `Float` | @default(0) | Amount actually charged (discountedPrice ?? price at registration time), snapshotted so it survives later edits to the service's price. 0 for a free registration. |
+| `discountCodeId` | `String?` |  | Mentor discount code applied at checkout (see Session.discountCodeId). |
+| `discountCode` | [DiscountCode?](#discountcode) | relation (FK) |  |
+| `discountAmount` | `Float?` |  |  |
 | `paymentId` | `String?` |  |  |
 | `answers` | `Json?` |  |  |
 | `joinedAt` | `DateTime?` |  |  |
@@ -238,6 +246,8 @@ A student asking to be notified when a slot frees up on a date that's currently 
 | `expiresAt` | `DateTime?` |  |  |
 | `isActive` | `Boolean` | @default(true) |  |
 | `createdAt` | `DateTime` | @default(now()) |  |
+| `sessions` | [Session[]](#session) |  |  |
+| `registrations` | [WebinarRegistration[]](#webinarregistration) |  |  |
 
 **Indexes & constraints:** `@@unique([mentorUserId, code])` · `@@index([mentorUserId])`
 

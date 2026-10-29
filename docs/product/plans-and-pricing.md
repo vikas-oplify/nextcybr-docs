@@ -59,7 +59,7 @@ Each audience has its own plan ladder. These are the **launch defaults**. The Ne
 | Support priority | Standard | Priority | Dedicated |
 
 :::caution Not built yet
-**Shared company workspace** and **employee development seats** are defined in the plans but have no product behind them yet. Don't sell or test them.
+**Shared company workspace** and **employee development seats** are defined in the plans but have no product behind them yet. Don't sell or test them. They aren't on the pricing page, and **Admin portal → Entitlements → Feature Matrix** marks them **Not built** with their controls locked.
 :::
 
 Recruiter screens show AI allowance as *searches and match runs remaining*, never as raw tokens.
@@ -72,7 +72,7 @@ Recruiter screens show AI allowance as *searches and match runs remaining*, neve
 | Active 1:1 services | 3 | Unlimited |
 | Active webinars | 2 | Unlimited |
 | Archive services (instead of only deactivating) | — | ✓ |
-| Discount codes | — | ✓ (manage only, see limitations) |
+| Discount codes candidates can use at checkout | — | ✓ |
 | Listed first in the mentor directory | — | ✓ |
 | Advanced earnings analytics | — | ✓ |
 | Full candidate profile views / month | 25 | 250 |

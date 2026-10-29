@@ -119,7 +119,9 @@ function parseRoutes() {
     const useText = routerUse ? routerUse[0] : "";
     const src = lines.filter((l) => !/^\s*\/\/\s*router\./.test(l)).join("\n");
 
-    const re = /router\.(get|post|put|patch|delete)\(\s*\[?\s*"([^"]+)"[^,]*,([\s\S]*?)\);\s*(?:\/\/\s*(.*))?$/gm;
+    // Trailing comment must be on the route's own line: \s* here used to
+    // swallow the next line's section comment into the previous route.
+    const re = /router\.(get|post|put|patch|delete)\(\s*\[?\s*"([^"]+)"[^,]*,([\s\S]*?)\);[ \t]*(?:\/\/[ \t]*(.*))?$/gm;
     let r;
     while ((r = re.exec(src))) {
       const before = src.slice(0, r.index).split("\n");
@@ -414,6 +416,11 @@ function generatePlans() {
     try { return extractArray(src, "RETIRED_FEATURE_KEYS"); } catch { return []; }
   })();
   const live = features.filter((f) => !retired.includes(f.key));
+  // Seeded but with no product behind them yet; the admin matrix locks these.
+  const unbuilt = (() => {
+    try { return extractArray(show(REPOS.server, "src/constants/unbuiltFeatures.js"), "UNBUILT_FEATURE_KEYS"); } catch { return []; }
+  })();
+  const notBuilt = (key) => (unbuilt.includes(key) ? ` <span class="gate gate--quota" title="No product behind it yet. Don't sell it.">Not built</span>` : "");
 
   const val = (userType, planKey, featureKey) => {
     const v = values.find((x) => x[0] === userType && x[1] === planKey && x[2] === featureKey);
@@ -438,7 +445,7 @@ function generatePlans() {
       .map((cat) => {
         const rows = feats
           .filter((f) => f.category === cat)
-          .map((f) => `| <span title="${esc(f.description)}">${esc(f.name)}</span><br/><code>${f.key}</code> | ${f.type === "BOOLEAN" ? "On/off" : RESET[f.resetPeriod] || f.resetPeriod} | ${tiers.map((p) => val(ut, p.key, f.key)).join(" | ")} |`)
+          .map((f) => `| <span title="${esc(f.description)}">${esc(f.name)}</span>${notBuilt(f.key)}<br/><code>${f.key}</code> | ${f.type === "BOOLEAN" ? "On/off" : RESET[f.resetPeriod] || f.resetPeriod} | ${tiers.map((p) => val(ut, p.key, f.key)).join(" | ")} |`)
           .join("\n");
         return `#### ${cat}\n\n| Feature | Type | ${tiers.map((p) => p.name.replace(/^(Candidate|Mentor|Recruiter) /, "")).join(" | ")} |\n| --- | --- | ${tiers.map(() => "---").join(" | ")} |\n${rows}`;
       })
@@ -448,7 +455,7 @@ function generatePlans() {
 
   write(
     "plans.mdx",
-    `---\ntitle: Plans & feature matrix\nsidebar_position: 3\ndescription: Seeded plan tiers and every feature limit per tier.\n---\n\n# Plans & feature matrix\n\n${banner(["nextcybr-server"])}\nThese are the **seeded defaults** from \`prisma/seedEntitlementSystem.js\`. Admins can change any value at runtime from **Admin portal → Entitlements**, and add per-country prices, so production may differ. The live values are always in the \`PlanFeatureValue\` table.\n\n- **${plans.length} plans** across three audiences · **${live.length} feature definitions**\n- <strong>Number</strong> = limit per period · <span class="cell-yes">Unlimited</span> · <span class="cell-yes">✓</span> enabled · <span class="cell-no">✕</span> disabled · <span class="cell-unset">unset</span> = no seeded value (the engine treats a missing row as disabled)\n- **Type** — \`Capacity\` limits count live records (e.g. active services); the others are counters that reset on the given schedule.\n\nHow these resolve at request time is covered in [Plans & entitlements engine](/backend/entitlements).\n\n${sections.join("\n")}`,
+    `---\ntitle: Plans & feature matrix\nsidebar_position: 3\ndescription: Seeded plan tiers and every feature limit per tier.\n---\n\n# Plans & feature matrix\n\n${banner(["nextcybr-server"])}\nThese are the **seeded defaults** from \`prisma/seedEntitlementSystem.js\`. Admins can change any value at runtime from **Admin portal → Entitlements**, and add per-country prices, so production may differ. The live values are always in the \`PlanFeatureValue\` table.\n\n- **${plans.length} plans** across three audiences · **${live.length} feature definitions**\n- <strong>Number</strong> = limit per period · <span class="cell-yes">Unlimited</span> · <span class="cell-yes">✓</span> enabled · <span class="cell-no">✕</span> disabled · <span class="cell-unset">unset</span> = no seeded value (the engine treats a missing row as disabled)\n- <span class="gate gate--quota">Not built</span> = seeded but no product behind it yet (\`src/constants/unbuiltFeatures.js\`). The admin matrix locks these; don't sell them.\n- **Type** — \`Capacity\` limits count live records (e.g. active services); the others are counters that reset on the given schedule.\n\nHow these resolve at request time is covered in [Plans & entitlements engine](/backend/entitlements).\n\n${sections.join("\n")}`,
   );
   return { plans: plans.length, features: live.length };
 }

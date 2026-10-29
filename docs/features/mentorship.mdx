@@ -134,7 +134,11 @@ stateDiagram-v2
 
 ## Discount codes & badges
 
-- **Discount codes.** Mentor Pro can create, list, edit and delete `DiscountCode`s (`MENTOR_DISCOUNT_CODES`). Applying a code at checkout is **not built yet**. The feature currently manages codes only.
+- **Discount codes.** Mentor Pro can create, list, edit and delete `DiscountCode`s (`MENTOR_DISCOUNT_CODES`). Students apply one at 1:1 or webinar checkout (`discountCode` on `book-session` / `webinar/register`). The checkout modals check it first with `POST /mentor/discount-codes/preview` (STUDENT, 10/min).
+  - **Price.** The code comes off the list price (`discountedPrice ?? price`): a percentage, or a flat amount capped at the price, rounded to cents. The result is stored as `Session.price` / `WebinarRegistration.price` with `discountCodeId` and `discountAmount`, so the Stripe charge, the platform fee, payouts and refunds all use the discounted amount.
+  - **Valid when** the code belongs to the service's mentor, is active, hasn't passed the end of its `expiresAt` day, is under `maxRedemptions`, and the mentor still has `MENTOR_DISCOUNT_CODES`. Rejected if the total would land between $0 and Stripe's $0.50 minimum. A 100% code confirms the booking with no payment.
+  - **Usage** (`redemptionCount`) is counted only when the checkout is confirmed (`payment_intent.succeeded`, or immediately when free), so abandoned checkouts don't use up a code. Two checkouts racing for the last use can take a code one past its limit.
+  - **Webinar resume.** An unpaid webinar checkout is resumed only at the same price. Coming back with a different code (or none) cancels the old PaymentIntent and re-prices.
 - **Badges.** `VERIFIED_MENTOR` (awarded on admin approval) and `PRO_MENTOR` (while on Mentor Pro). See `GET /mentor/badges`.
 
 ## Platform fee

@@ -12,8 +12,7 @@ Check here before logging a bug or writing a requirement that assumes these work
 
 | Area | Limitation |
 | --- | --- |
-| Recruiter plans | **Shared company workspace** (multiple recruiters per company) and **employee development seats** are listed in the plans but have no product behind them |
-| Mentor discount codes | Mentors on Pro can create and manage codes, but **codes can't be applied at checkout yet**. Nobody gets a discount from them. |
+| Recruiter plans | **Shared company workspace** (multiple recruiters per company) and **employee development seats** are defined in the plans but have no product behind them. They're left off the pricing page, and the admin feature matrix marks them **Not built** and locks them. |
 | CV upload | **PDF only.** Word (DOC/DOCX) uploads aren't supported. |
 | Challenges (candidate menu) | Placeholder screen |
 | Admin portal | No way to create, edit or delete users. No job, applicant or hire reports. **Reports** and **Settings** screens are placeholders. |

@@ -25,6 +25,7 @@ description: What mentors sell, plan limits on services, availability windows, b
 | Discount codes | — | ✓ |
 
 - **Prices are in USD.** The price at booking time is locked for that booking. Changing a price later never changes past bookings or earnings.
+- **Discount codes** (Pro) are entered by the candidate at checkout and come off the service's current price. Percentage or flat amount, optional usage limit and expiry date (valid through that day). A code that makes the booking free confirms it straight away. Your earnings and platform fee are based on what the candidate actually paid. Codes stop working if you leave Pro.
 - A service only counts toward the limit while it's **active**.
 
 ## Availability

@@ -53,6 +53,8 @@ src/
 
 ## Plan changes take effect immediately
 
+Features with no product behind them yet (`src/constants/unbuiltFeatures.js` on the server, returned as `notBuilt: true`) show a **Not built** badge in both tabs. Their matrix controls are locked, so their seeded values are kept but can't be changed until the feature ships.
+
 Saving a plan's feature matrix calls `invalidatePlanCache(planId)` on the server, so the change applies right away on that instance. Other cluster instances pick it up within the 60-second cache TTL. See [Entitlements engine](/backend/entitlements#caching).
 
 ## Scripts
