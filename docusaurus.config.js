@@ -12,8 +12,8 @@ const config = {
     faster: true,
   },
 
-  url: "https://vikas-oplify.github.io",
-  baseUrl: "/nextcybr-docs/",
+  url: "https://docs.nextcybr.ai",
+  baseUrl: "/",
   trailingSlash: false,
   organizationName: "vikas-oplify",
   projectName: "nextcybr-docs",
