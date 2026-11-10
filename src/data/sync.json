@@ -1,21 +1,21 @@
 {
   "ref": "master",
-  "syncedAt": "2026-10-29T18:02:56.415Z",
+  "syncedAt": "2026-11-10T12:58:53.545Z",
   "repos": {
     "server": {
-      "sha": "04ffe92",
-      "date": "2026-10-29T23:31:42+05:30",
-      "subject": "Merge pull request #236 from oplifyterminal/feat/flag-unbuilt-plan-features"
+      "sha": "5ea5247",
+      "date": "2026-11-10T18:07:25+05:30",
+      "subject": "Merge pull request #240 from oplifyterminal/fix/invoice-plan-snapshot"
     },
     "portal": {
-      "sha": "2efcfce",
-      "date": "2026-10-29T23:31:50+05:30",
-      "subject": "Merge pull request #272 from oplifyterminal/fix/next-image-warnings"
+      "sha": "208acde",
+      "date": "2026-11-10T18:11:04+05:30",
+      "subject": "Merge pull request #278 from oplifyterminal/fix/invoice-pdf-plan"
     },
     "admin": {
-      "sha": "78ed1ae",
-      "date": "2026-10-29T23:31:55+05:30",
-      "subject": "Merge pull request #71 from oplifyterminal/feat/flag-unbuilt-plan-features"
+      "sha": "15a0fe4",
+      "date": "2026-10-30T22:50:51+05:30",
+      "subject": "Merge pull request #72 from oplifyterminal/chore/manual-deploy"
     }
   },
   "counts": {

@@ -249,6 +249,8 @@ Platform-wide codes used only when purchasing a subscription. This is intentiona
 | `invoiceNumber` | `String?` |  |  |
 | `hostedInvoiceUrl` | `String?` |  |  |
 | `pdfUrl` | `String?` |  |  |
+| `planName` | `String?` |  | The plan this invoice billed for, snapshotted when it is paid — the linked Subscription changes on upgrade, so it can't tell an old invoice's plan. |
+| `billingCycle` | [BillingCycleType?](./enums#billingcycletype) |  |  |
 | `billingReason` | `String?` |  |  |
 | `status` | [InvoiceStatus](./enums#invoicestatus) | @default(DRAFT) |  |
 | `amountDue` | `Int?` |  |  |
